@@ -1,0 +1,18 @@
+#! /user/bin/python3
+import requests                                                   #导入模块
+import json                                                       #导入模块
+
+url = 'https://foo.com/bar'                                       #需要上传的地址
+rdata = {
+      "deviceName": "BBAOMACBOOKAIR2",                            #设备名称
+      "processId": "78",                                          #错误的进程号码
+      "processName": "Undefined error",                           #进程/服务名称
+      "description":" Could not find uid associated with service",#错误的原因（描述）
+      "timeWindow":"Every hour",                                  #发生的时间（小时级）
+      "numberOfOccurrence":"15",                                  #在小时级别内发生的次数
+}
+headers = {'content-type': 'application/json',}                   #定制表头
+
+ret = requests.post(url,data=json.dumps(rdata),headers=headers)   #按照格式上传
+
+print(ret.text)
